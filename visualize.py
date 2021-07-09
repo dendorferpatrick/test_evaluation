@@ -12,9 +12,11 @@ def parse_line(line) -> tuple:
 
 def create_framedata(result_file: "os.PathLike[Any]", output_directory: "os.PathLike[Any]") -> None:
     out_prediction = os.path.join(output_directory, "prediction")
-    
-    os.makedirs(out_prediction)
-    
+    try:
+        os.makedirs(out_prediction)
+    except: 
+        pass 
+        
     with open(result_file, 'r') as file:
         lines = file.readlines()
         lines = map(parse_line, lines)
